@@ -1,0 +1,19 @@
+/* Gruvbox Material Light Palette */
+@define-color background #fbf1c7;
+@define-color foreground #3c3836;
+@define-color module_bg #ebdbb2; /* Bg2 */
+@define-color module_fg #3c3836;
+
+@define-color active_workspace_bg #076678; /* Blue */
+@define-color active_workspace_fg #fbf1c7; /* Bg */
+
+@define-color red #c14a4a;
+@define-color green #6c782e;
+@define-color yellow #b47109;
+@define-color blue #45707a;
+@define-color orange #c35e0a;
+@define-color purple #945e80;
+
+@define-color critical @red;
+@define-color warning @orange;
+@define-color disconnected #928374; /* Grey */

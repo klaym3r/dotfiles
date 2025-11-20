@@ -1,0 +1,282 @@
+@import "colors.css";
+
+* {
+    font-family: 'SF Pro Text', 'JetBrains Mono Nerd Font Propo', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+window#waybar {
+    background-color: transparent; /* Или используйте @background, если хотите цветной бар */
+    color: @foreground;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+window#waybar.termite {
+    background-color: @background;
+}
+
+window#waybar.chromium {
+    background-color: @background;
+    border: none;
+}
+
+button {
+    box-shadow: inset 0 -3px transparent;
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px @foreground;
+}
+
+#pulseaudio:hover {
+    background-color: @yellow;
+    color: @background;
+}
+
+#workspaces button {
+    border-radius: 10px;
+    transition: 0.2s ease-in-out;
+    padding: 0 5px;
+    color: @foreground;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.focused {
+    background-color: @module_bg;
+    box-shadow: inset 0 -3px @foreground;
+}
+
+#workspaces button.urgent {
+    background-color: @critical;
+    color: @background;
+}
+
+#workspaces button.active {
+    background-color: @active_workspace_bg;
+    color: @active_workspace_fg;
+}
+
+#workspaces button:first-child {
+    margin-left: 0px;
+}
+
+/* ГРУППА МОДУЛЕЙ */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#custom-network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd,
+#language,
+#keyboard-state {
+    padding: 0 10px;
+    background-color: @module_bg;
+    color: @module_fg;
+    margin: 0 5px;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+/* Battery specific */
+#battery.charging, #battery.plugged {
+    color: @module_fg;
+    background-color: @module_bg;
+}
+
+@keyframes blink {
+    to {
+        background-color: @foreground;
+        color: @background;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: @critical;
+    color: @background;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Power Profiles */
+#power-profiles-daemon {
+    margin-right: 20px;
+}
+
+/* Network */
+#network.disconnected {
+    background-color: @disconnected;
+}
+
+/* Audio */
+#pulseaudio.muted, #wireplumber.muted {
+    background-color: @disconnected;
+    color: @module_fg;
+}
+
+/* Custom Media */
+#custom-media {
+    background-color: @green;
+    color: @background;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+    background-color: @green;
+}
+
+#custom-media.custom-vlc {
+    background-color: @orange;
+}
+
+/* Temperature */
+#temperature {
+    background-color: @orange;
+    color: @background;
+}
+
+#temperature.critical {
+    background-color: @critical;
+    color: @background;
+}
+
+/* Tray */
+#tray {
+    background-color: @blue;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @critical;
+}
+
+/* Idle Inhibitor */
+#idle_inhibitor {
+    background-color: @module_bg;
+    color: @module_fg;
+}
+
+#idle_inhibitor.activated {
+    background-color: @foreground;
+    color: @background;
+}
+
+/* MPD */
+#mpd {
+    background-color: @green;
+    color: @background;
+}
+
+#mpd.disconnected {
+    background-color: @critical;
+}
+
+#mpd.stopped {
+    background-color: @disconnected;
+}
+
+#mpd.paused {
+    background-color: @blue;
+}
+
+/* Language & Keyboard */
+#language {
+    min-width: 16px;
+}
+
+#keyboard-state {
+    background: @green;
+    color: @background;
+    min-width: 16px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Scratchpad */
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+    background-color: transparent;
+}
+
+/* Privacy */
+#privacy {
+    padding: 0;
+}
+
+#privacy-item {
+    padding: 0 5px;
+    color: @background;
+}
+
+#privacy-item.screenshare {
+    background-color: @orange;
+}
+
+#privacy-item.audio-in {
+    background-color: @green;
+}
+
+#privacy-item.audio-out {
+    background-color: @blue;
+}
+
+#custom-theme_toggle {
+  background-color: @module_bg;
+  color: @module_fg;
+  padding: 0 10px;
+  margin: 0 5px;
+  margin-left: 20px;
+  border-radius: 10px;
+}
+
+#custom-theme_toggle:hover {
+  background-color: @active_workspace_bg;
+  color: @active_workspace_fg;
+}
