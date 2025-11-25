@@ -5,6 +5,8 @@ STATE_FILE="$HOME/.config/hypr/theme_state"
 WAYBAR_CONFIG_DIR="$HOME/.config/waybar"
 KITTY_CONFIG_DIR="$HOME/.config/kitty"
 MAKO_CONFIG_DIR="$HOME/.config/mako"
+NVIM_CACHE_DIR ="$HOME/.local/share/nvim/base46"
+ROFI_CONFIG_DIR="$HOME/.config/rofi"
 
 WALLPAPER_DIR="$HOME/.config/hypr/Wallpapers/"
 WALLPAPER_LIGHT="frieren_gruvbox.png"
@@ -28,6 +30,7 @@ if [ "$CURRENT_MODE" == "dark" ]; then
   ln -sf "$WAYBAR_CONFIG_DIR/colors-light.css" "$WAYBAR_CONFIG_DIR/colors.css"
   ln -sf "$MAKO_CONFIG_DIR/config_light" "$MAKO_CONFIG_DIR/config"
   ln -sf "$KITTY_CONFIG_DIR/gruvbox_light.conf" "$KITTY_CONFIG_DIR/current-theme.conf"
+  ln -sf "$ROFI_CONFIG_DIR/colors-light.rasi" "$ROFI_CONFIG_DIR/colors.rasi"
 else
   NEW_MODE="dark"
 
@@ -42,9 +45,12 @@ else
   ln -sf "$WAYBAR_CONFIG_DIR/colors-dark.css" "$WAYBAR_CONFIG_DIR/colors.css"
   ln -sf "$MAKO_CONFIG_DIR/config_dark" "$MAKO_CONFIG_DIR/config"
   ln -sf "$KITTY_CONFIG_DIR/catppuccin-mocha.conf" "$KITTY_CONFIG_DIR/current-theme.conf"
+  ln -sf "$ROFI_CONFIG_DIR/colors-dark.rasi" "$ROFI_CONFIG_DIR/colors.rasi"
 fi
 
 echo "$NEW_MODE" > "$STATE_FILE"
+
+rm -rf "$NVIM_CACHE_DIR"
 
 swww img "$CURRENT_WALLPAPER" \
   --transition-type grow \
