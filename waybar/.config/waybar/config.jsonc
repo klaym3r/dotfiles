@@ -1,35 +1,94 @@
 // -*- mode: jsonc -*-
 {
-    // "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 32, // Waybar height (to be removed for auto height)
-    // Choose the order of the modules
+    "layer": "top", // Waybar at top layer
+    // "height": 30, // Waybar height (to be removed for auto height)
     "modules-left": [
         "custom/theme_toggle",
-        "hyprland/workspaces"
+        "clock"
     ],
     "modules-center": [
-        "clock"
+        "hyprland/workspaces"
     ],
     "modules-right": [
         "pulseaudio",
         "backlight",
         "battery",
-        "hyprland/language",
-        "custom/network",
-        "power-profiles-daemon",
+        // "hyprland/language",
+        "network",
+        "tray"
     ],
+
     "hyprland/language": {
       "format": "{short}"
     },
-    "hyprland/workspaces": {
-        "format": "{name}",
-        "persistent-workspaces": {
-          "*": [1, 2, 3, 4, 5],
-          //"HDMI-A-1": [ 1 ]// 5 workspaces by default on every monitor
-        }
 
+    "hyprland/workspaces": {
+        "format": "",
+        "on-click": "activate",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "cursor": "pointer",
+        "persistent-workspaces": {
+          "*": 4
+        }
     },
+
+    "group/misc": {
+      "orientation": "horizontal",
+      "drawer": {
+        "transition-duration": 500,
+        "children-class": "misc-modules",
+        "transition-top-to-bottom": false
+      },
+      "modules": [
+        "custom/separator",
+        // "custom/notification",
+        "power-profiles-daemon",
+        "custom/theme_toggle"
+      ]
+    },
+
+    "custom/notification": {
+      "tooltip": true,
+      "format": "<span size='16pt'>{icon}</span>",
+      "format-icons": {
+        "notification": "󱅫",
+        "none": "󰂜",
+        "dnd-notification": "󰂠",
+        "dnd-none": "󰪓",
+        "inhibited-notification": "󰂛",
+        "inhibited-none": "󰪑",
+        "dnd-inhibited-notification": "󰂛",
+        "dnd-inhibited-none": "󰪑"
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+    },
+
+    "custom/separator": {
+      "format": "|",
+      "tooltip": false
+    },
+
+    "pulseaudio/slider": {
+      "min": 0,
+      "max": 100,
+      "orientation": "horizontal"
+    },
+
+    "group/volume": {
+      "orientation": "horizontal",
+      "drawer": {
+        "transition-duration": 500,
+        "transition-top-to-bottom": true
+      },
+      "modules": ["pulseaudio", "pulseaudio/slider"]
+    },
+
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -39,18 +98,20 @@
             "unlocked": ""
         }
     },
+
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 15,
         "spacing": 10,
-        // "icons": {
-        //   "blueman": "bluetooth",
-        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-        // }
+        "icons": {
+          "blueman": "bluetooth",
+          "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        }
     },
+
     "custom/theme_toggle": {
         "format": "{}",
         "interval": 1,
-        "exec": "if [ \"$(cat $HOME/.config/hypr/theme_state)\" == \"dark\" ]; then echo \"\"; else echo \"\"; fi",
+        "exec": "if [ \"$(cat $HOME/.config/hypr/theme_state)\" == \"dark\" ]; then echo \"\udb83\udf64\"; else echo \"\ue3e3\"; fi",
         "on-click": "~/.config/hypr/scripts/theme-switcher.sh",
         "tooltip": false
     },
@@ -62,7 +123,7 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
+        "format": "{icon}  {percent}%",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
@@ -71,11 +132,11 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% \ueea1",
-        "format-plugged": "{capacity}% \uf1e6",
-        "format-alt": "{time} {icon}",
+        "format": "{capacity}%  {icon}",
+        "format-full": "{capacity}%  {icon}",
+        "format-charging": "\ueea1  {capacity}%",
+        "format-plugged": "\uf1e6  {capacity}%",
+        "format-alt": "{icon}  {time}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
@@ -96,37 +157,40 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ",
+        "format": "{ifname}",
+        "format-wifi": "{icon} {essid}",
         "format-ethernet": "\udb80\ude00",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-disconnected": "\udb82\udd2d",
+        "max-length": 8,
+        "format-icons": ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
+        "tooltip-format": "Connected to {essid}"
     },
+
     "custom/network": {
       "interval": 5,
       "exec": "iwgetid -r | cut -c -7",
       "format": "{}  "
     },
+
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
-        "format-bluetooth-muted": "\uf466 ",
+        "format": "{icon}  {volume}%",
+        "format-bluetooth": "",
         "format-muted": "\udb81\udf5f",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effect Sink"],
         "format-icons": {
-            "headphone": "\uee58",
+            "headphone": "\uf025",
             "hands-free": "",
-            "headset": "\uee58",
+            "headset": "\udb80\udece",
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": ["\uf026", "\uf027", "\uf028"]
         },
-        "on-click": "pavucontrol"
+        "tooltip-format": "Volume: {volume}%"
     },
+
     "custom/media": {
         "format": "{icon} {text}",
         "return-type": "json",
