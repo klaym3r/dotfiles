@@ -1,0 +1,13 @@
+* {
+    bg-col:       #fbf1c7;
+    bg-col-light: #fbf1c7;
+    border-col:   #ebdbb2;
+    selected-col: #ebdbb2;
+    blue:         #076678;
+    fg-col:       #3c3836;
+    fg-col2:      #9d0006; /* Красный для контраста выделения */
+    grey:         #928374;
+
+    width: 600;
+    font: "SF Pro Text 14";
+}

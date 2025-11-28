@@ -1,0 +1,12 @@
+format = "$character$directory$git_branch"
+
+[directory]
+format = "[$path]($style) "
+truncation_length = 1
+truncate_to_repo = false
+truncation_symbol = ""
+
+[character]
+success_symbol = "→"
+error_symbol = "→"
+vicmd_symbol = "←"
