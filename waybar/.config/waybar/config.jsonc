@@ -3,12 +3,12 @@
     "layer": "top", // Waybar at top layer
     // "height": 30, // Waybar height (to be removed for auto height)
     "modules-left": [
-        "clock",
+        "hyprland/workspaces",
         "custom/theme_toggle",
         "power-profiles-daemon"
     ],
     "modules-center": [
-        "hyprland/workspaces"
+        "clock"
     ],
     "modules-right": [
         "pulseaudio",
