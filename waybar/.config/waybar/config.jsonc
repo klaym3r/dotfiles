@@ -175,7 +175,7 @@
 
     "pulseaudio": {
         "format": "{icon}  {volume}%",
-        "format-bluetooth": "",
+        "format-bluetooth": "  {volume}%",
         "format-muted": "\udb81\udf5f",
         "scroll-step": 1,
         "on-click": "pavucontrol",
