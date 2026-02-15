@@ -14,7 +14,6 @@ window#waybar {
   /* background-color: alpha(@background, 0.8); */
   background-color: transparent;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
-  margin-top: 10px;
   /* padding-top: 12px; */
   /* padding-bottom: 2px; */
 }
@@ -48,7 +47,7 @@ button:hover {
 #workspaces {
   background: @background;
   min-height: 0;
-  margin: 0 0 0 20px;
+  margin: 0 0 0 15px;
   padding: 0 2px;
   transition: all 0.3s ease-in-out;
   border-radius: 9999px;
