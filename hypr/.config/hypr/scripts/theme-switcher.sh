@@ -10,7 +10,7 @@ ROFI_CONFIG_DIR="$HOME/.config/rofi"
 
 WALLPAPER_DIR="$HOME/.config/hypr/Wallpapers/"
 WALLPAPER_LIGHT="frieren_gruvbox.png"
-WALLPAPER_DARK="harbor.jpg"
+WALLPAPER_DARK="cat-vibin.png"
 
 # === ОПРЕДЕЛЕНИЕ ТЕКУЩЕЙ ТЕМЫ ===
 if [ ! -f "$STATE_FILE" ]; then echo "light" > "$STATE_FILE"; fi
